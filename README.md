@@ -4,6 +4,17 @@ A self-contained copy of the **Iron Snout** HTML5 game — a fast-paced fighting
 
 ## How to Play
 
+### With Docker
+
+```bash
+docker build -t ironsnout .
+docker run -p 8080:80 ironsnout
+```
+
+Then open `http://localhost:8080` in your browser.
+
+### Without Docker
+
 Serve this folder with any static file server:
 
 ```bash
@@ -35,7 +46,9 @@ IRONSNOUT/
 ├── poki-sdk.js                 # Poki SDK loader
 ├── poki-sdk-core-v2.263.0.js   # Poki SDK core (ad integration)
 ├── cloak.js                    # Domain redirect logic
-└── logo.png                    # Game logo
+├── logo.png                    # Game logo
+├── Dockerfile                  # Container build (nginx:alpine)
+└── .dockerignore               # Files excluded from Docker build
 ```
 
 ## Technical Details
@@ -45,6 +58,7 @@ IRONSNOUT/
 - Integrates with **Poki SDK** for game lifecycle events (loading progress, ad breaks)
 - Audio in OGG format
 - No build step or dependencies required — purely static files
+- Containerized with **nginx:alpine** for lightweight deployment
 
 ## Credits
 
