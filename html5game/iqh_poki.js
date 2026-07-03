@@ -1,50 +1,36 @@
-/// Poki Iron Snout
+/// Poki Iron Snout - Stubbed for offline use
 
 function poki_loading_finished() {
-	poki_log("Loading finished");
-	sdk.gameLoadingFinished();
+	// no-op
 }
 
 function poki_loading_update(percents) {
-	sdk.gameLoadingProgress({percentageDone: percents});
+	// no-op
 }
 
 function poki_gameplay_start(reason) {
-	poki_log("Gameplay Start: " + reason);
-	sdk.gameplayStart(reason);		
+	// no-op
 }
 
 function poki_gameplay_stop(reason) {
-	poki_log("Gameplay Stop: " + reason);
-	sdk.gameplayStop(reason);
+	// no-op
 }
 
 function poki_happy(value) {
-	console.log("Happy: " + value);
-	sdk.happyTime(value);
+	// no-op
 }
 
 function poki_break(tag) {
+	// Immediately complete the break without showing ads
 	poki_callback("poki.break.started", tag);
-	sdk.commercialBreak().then(function(){
-		poki_callback("poki.break.completed", tag);
-	});
+	poki_callback("poki.break.completed", tag);
 }
 
 function poki_rewarded_break(tag) {
+	// Immediately grant the reward without showing ads
 	poki_callback("poki.rewarded.started", tag);
-    
-	sdk.rewardedBreak().then(
-		(withReward) => {
-			if (withReward) {
-				poki_callback("poki.rewarded.completed", tag);
-			} else {
-				poki_callback("poki.rewarded.failed", tag);		
-			}
-		}
-	);
+	poki_callback("poki.rewarded.completed", tag);
 }
-
 
 function poki_callback(event, args) {
 	gmCallback.game_callback(event, args);	

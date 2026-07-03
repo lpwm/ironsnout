@@ -10,9 +10,8 @@
         <title>Iron Snout</title>
 		<meta name="description" content="Iron Snout is a online fighting game created by SnoutUp where you play as a pig, and have to fight the wolves.">
 		<meta name="robots" content="noindex,nofollow" />
-	<script type="text/javascript" src="cloak.js"></script>
-		<script src="poki-sdk.js"></script> 
-		<script src="poki-sdk-core-v2.263.0.js"></script>       <style>
+	<script type="text/javascript" src="poki-sdk.js"></script>
+        <style>
             body {
               background: #ffffff;
               color:#cccccc;
@@ -26,6 +25,7 @@
                       image-rendering: optimizeSpeed;
                       -webkit-interpolation-mode: nearest-neighbor;
                       -ms-touch-action: none;
+                      touch-action: none;
                       margin: 0px;
                       padding: 0px;
                       border: 0px;
@@ -41,187 +41,64 @@
               padding: 0px;
               border: 0px;
             }
-        </style><style>
-.pokiSdkContainer {
-	overflow: hidden;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1000;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 
-.pokiSdkContainer.pokiSdkFixed {
-	position: fixed;
-}
-
-.pokiSdkContainer.pokiSdkVisible {
-	display: block;
-}
-
-.pokiSdkContainer.pokiSdkHidden,
-.pokiSdkSpinnerContainer.pokiSdkHidden {
-	display: none;
-}
-
-.pokiSdkContainer.pokiSdkHidden,
-.pokiSdkSpinnerContainer {
-	pointer-events: none;
-}
-
-.pokiSdkSpinnerContainer {
-	z-index: 10;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: url('https://a.poki.com/images/thumb_anim_2x.gif') 50% 50% no-repeat;
-	user-select: none;
-}
-
-.pokiSdkInsideContainer {
-	background: #000;
-	position: relative;
-	z-index: 1;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-
-	opacity: 0;
-	-webkit-transition: opacity 0.5s ease-in-out;
-	-moz-transition: opacity 0.5s ease-in-out;
-	-ms-transition: opacity 0.5s ease-in-out;
-	-o-transition: opacity 0.5s ease-in-out;
-	transition: opacity 0.5s ease-in-out;
-}
-
-.pokiSdkContainer.pokiSdkVisible .pokiSdkInsideContainer {
-	opacity: 1;
-}
-
-.pokiSDKAdContainer, .pokiSdkVideoContainer {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-}
-
-.pokiSdkStartAdButton {
-	position: absolute;
-	z-index: 9999;
-	top: 0;
-
-	padding-top: 10%;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	color: #FFF;
-
-	font: 700 15pt 'Arial', sans-serif;
-	font-weight: bold;
-	letter-spacing: 1px;
-	transition: 0.1s ease-in-out;
-	line-height: 1em;
-}
-
-.pokiSdkPauseButton {
-	cursor:pointer;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-}
-
-.pokiSdkPauseButton:before {
-	content: '';
-	position: absolute;
-	width: 100px;
-	height: 100px;
-	display: block;
-	border: 2px solid #fff;
-	border-radius: 50%;
-	user-select: none;
-	background-color: rgba(0, 0, 0, 0.6);
-	transition: background-color 0.5s ease;
-	animation: 1s linear infinite pulse;
-}
-
-.pokiSdkPauseButton:after {
-	content: '';
-	position: absolute;
-	display: block;
-	box-sizing: border-box;
-	border-color: transparent transparent transparent #fff;
-	border-style: solid;
-	border-width: 26px 0 26px 40px;
-	pointer-events: none;
-	animation: 1s linear infinite pulse;
-	left: 6px;
-}
-.pokiSdkPauseButtonBG {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: block;
-    content: '';
-    background: rgba(0, 43, 80, 0.5);
-    width: 100%;
-    height: 100%;
-}
-
-.pokiSdkPauseButtonBG:hover{
-	background: rgba(0, 43, 80, 0.7);
-}
-
-@keyframes pulse {
-	0% {
-		transform: translate(-50%, -50%) scale(0.95);
-	}
-	70% {
-		transform: translate(-50%, -50%) scale(1.1);
-	}
-	100% {
-		transform: translate(-50%, -50%) scale(0.95);
-	}
-}
-
-.pokiSdkProgressContainer {
-	background: #B8C7DD;
-	width: 100%;
-	height: 5px;
-	position: absolute;
-	bottom: 0;
-	z-index: 9999;
-}
-
-.pokiSdkProgressBar {
-	position:relative;
-	bottom:0px;
-	background: #FFDC00;
-	height: 100%;
-	width: 0%;
-	transition: width 0.5s;
-	transition-timing-function: linear;
-}
-
-.pokiSdkProgressBar.pokiSdkVisible, .pokiSdkPauseButton.pokiSdkVisible, .pokiSdkStartAdButton.pokiSdkVisible {
-	display: block;
-	pointer-events: auto;
-}
-
-.pokiSdkProgressBar.pokiSdkHidden, .pokiSdkPauseButton.pokiSdkHidden, .pokiSdkStartAdButton.pokiSdkHidden {
-	display: none;
-	pointer-events: none;
-}
-</style></head>
+            /* Infinite Health Toggle */
+            #cheat-toggle {
+              position: fixed;
+              top: 10px;
+              right: 10px;
+              z-index: 9999;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              background: rgba(0, 0, 0, 0.7);
+              padding: 8px 12px;
+              border-radius: 20px;
+              cursor: pointer;
+              user-select: none;
+              font-family: Arial, sans-serif;
+              font-size: 13px;
+              color: #fff;
+              transition: background 0.2s;
+            }
+            #cheat-toggle:hover {
+              background: rgba(0, 0, 0, 0.85);
+            }
+            #cheat-toggle .toggle-switch {
+              position: relative;
+              width: 36px;
+              height: 20px;
+              background: #555;
+              border-radius: 10px;
+              transition: background 0.2s;
+            }
+            #cheat-toggle .toggle-switch::after {
+              content: '';
+              position: absolute;
+              top: 2px;
+              left: 2px;
+              width: 16px;
+              height: 16px;
+              background: #fff;
+              border-radius: 50%;
+              transition: transform 0.2s;
+            }
+            #cheat-toggle.active .toggle-switch {
+              background: #4caf50;
+            }
+            #cheat-toggle.active .toggle-switch::after {
+              transform: translateX(16px);
+            }
+        </style>
+</head>
 
     <body>
-		
+        <!-- Infinite Health Toggle Button -->
+        <div id="cheat-toggle" onclick="toggleInfiniteHealth()">
+            <span>&#x2764; Infinite HP</span>
+            <div class="toggle-switch"></div>
+        </div>
+
         <div class="gm4html5_div_class" id="gm4html5_div_id">
             <!-- Create the canvas element the game draws to -->
             <canvas id="canvas" width="640" height="360" style="touch-action: none; cursor: none;">
@@ -233,26 +110,72 @@
 		<script>
 		var sdk 		= PokiSDK;
 		var pokiDebug 	= false;
-        var canvas      = document.getElementById("canvas");            
-		
+        var canvas      = document.getElementById("canvas");
+
+        // Infinite Health Mode
+        window.infiniteHealth = false;
+
+        function toggleInfiniteHealth() {
+            window.infiniteHealth = !window.infiniteHealth;
+            var btn = document.getElementById('cheat-toggle');
+            if (window.infiniteHealth) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
 		
 		function poki_log(t) {
 			if (pokiDebug) console.log(t);
 		}
 		
 		function poki_loading(percents) {
-			sdk.gameLoadingProgress({percentageDone: percents});
+			// no-op: Poki SDK removed
 		}
 
 		
 		window.onload = function() {
-			sdk.init().then(() => {
-				GameMaker_Init();			
-				sdk.gameLoadingStart();				
-			}).catch(() => {
-				GameMaker_Init();
-			});
-			sdk.setDebug(pokiDebug);
+            // Monkey-patch health functions for infinite health mode
+
+            // Patch _0H: PlayerHealthChange(player, change)
+            // This is called when the player takes damage (change < 0)
+            if (typeof _0H === 'function') {
+                var _originalHealthChange = _0H;
+                var _patchedHealthChange = function(_li, _mi, _Ki, _Li) {
+                    if (window.infiniteHealth) {
+                        var change = _Li;
+                        if (typeof change === 'number' && change < 0) {
+                            return 1;
+                        }
+                        if (typeof change === 'object' && change.valueOf && change.valueOf() < 0) {
+                            return 1;
+                        }
+                    }
+                    return _originalHealthChange(_li, _mi, _Ki, _Li);
+                };
+                _patchedHealthChange._qS4 = _patchedHealthChange;
+                _0H = _patchedHealthChange;
+            }
+
+            // Patch _1I: SetHealth(entity, hp) - prevents health from being set to 0 or below
+            if (typeof _1I === 'function') {
+                var _originalSetHealth = _1I;
+                _1I = function(_li, _mi, _Ki, _Li) {
+                    if (window.infiniteHealth) {
+                        var hp = _Li;
+                        if (typeof hp === 'number' && hp <= 0) {
+                            _Li = 1;
+                        } else if (typeof hp === 'object' && hp.valueOf && hp.valueOf() <= 0) {
+                            _Li = 1;
+                        }
+                    }
+                    return _originalSetHealth(_li, _mi, _Ki, _Li);
+                };
+                _1I._qS4 = _1I;
+            }
+
+			// Start the game directly without Poki SDK
+			GameMaker_Init();
             
             canvas.width  = window.innerWidth;
             canvas.height = window.innerHeight;
